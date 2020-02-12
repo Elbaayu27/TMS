@@ -1,0 +1,255 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 32744 bytes for ChunkPool::allocate
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:272), pid=2964, tid=0x0000000000002578
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_211-b12) (build 1.8.0_211-b12)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.211-b12 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000002422800):  JavaThread "main" [_thread_in_vm, id=9592, stack(0x0000000002310000,0x0000000002410000)]
+
+Stack: [0x0000000002310000,0x0000000002410000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  java.lang.ClassLoader.defineClass1(Ljava/lang/String;[BIILjava/security/ProtectionDomain;Ljava/lang/String;)Ljava/lang/Class;+0
+j  java.lang.ClassLoader.defineClass(Ljava/lang/String;[BIILjava/security/ProtectionDomain;)Ljava/lang/Class;+27
+j  java.security.SecureClassLoader.defineClass(Ljava/lang/String;[BIILjava/security/CodeSource;)Ljava/lang/Class;+12
+j  java.net.URLClassLoader.defineClass(Ljava/lang/String;Lsun/misc/Resource;)Ljava/lang/Class;+138
+J 310 C1 java.net.URLClassLoader$1.run()Ljava/lang/Class; (63 bytes) @ 0x00000000026d1914 [0x00000000026d1660+0x2b4]
+J 287 C1 java.net.URLClassLoader$1.run()Ljava/lang/Object; (5 bytes) @ 0x00000000026c084c [0x00000000026c07c0+0x8c]
+v  ~StubRoutines::call_stub
+J 256  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedExceptionAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000000026b5e26 [0x00000000026b5dc0+0x66]
+J 285 C1 java.net.URLClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class; (47 bytes) @ 0x00000000026c8fc4 [0x00000000026c8e40+0x184]
+J 130 C1 java.lang.ClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class; (122 bytes) @ 0x000000000266a0ec [0x0000000002669780+0x96c]
+J 291 C1 java.lang.ClassLoader.loadClass(Ljava/lang/String;)Ljava/lang/Class; (7 bytes) @ 0x00000000026cae8c [0x00000000026cad80+0x10c]
+v  ~StubRoutines::call_stub
+j  org.gradle.internal.logging.services.LoggingServiceRegistry.createLoggingManagerFactory()Lorg/gradle/internal/logging/services/DefaultLoggingManagerFactory;+93
+v  ~StubRoutines::call_stub
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+100
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+56
+j  org.gradle.internal.reflect.JavaMethod.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  org.gradle.internal.service.ReflectionBasedServiceMethod.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  org.gradle.internal.service.DefaultServiceRegistry$FactoryMethodService.invokeMethod([Ljava/lang/Object;)Ljava/lang/Object;+9
+j  org.gradle.internal.service.DefaultServiceRegistry$FactoryService.create()Ljava/lang/Object;+7
+j  org.gradle.internal.service.DefaultServiceRegistry$ManagedObjectProvider.getInstance()Ljava/lang/Object;+9
+j  org.gradle.internal.service.DefaultServiceRegistry$SingletonService.get()Ljava/lang/Object;+1
+j  org.gradle.internal.service.DefaultServiceRegistry.doGet(Ljava/lang/reflect/Type;)Ljava/lang/Object;+87
+j  org.gradle.internal.service.DefaultServiceRegistry.get(Ljava/lang/Class;)Ljava/lang/Object;+3
+j  org.gradle.internal.logging.services.LoggingServiceRegistry.newCommandLineProcessLogging()Lorg/gradle/internal/logging/services/LoggingServiceRegistry;+13
+j  org.gradle.launcher.cli.CommandLineActionFactory.createLoggingServices()Lorg/gradle/internal/service/ServiceRegistry;+0
+j  org.gradle.launcher.cli.CommandLineActionFactory.convert(Ljava/util/List;)Lorg/gradle/api/Action;+1
+j  org.gradle.launcher.Main.doAction([Ljava/lang/String;Lorg/gradle/launcher/bootstrap/ExecutionListener;)V+8
+j  org.gradle.launcher.bootstrap.EntryPoint.run([Ljava/lang/String;)V+12
+v  ~StubRoutines::call_stub
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+100
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+56
+j  org.gradle.launcher.bootstrap.ProcessBootstrap.runNoExit(Ljava/lang/String;[Ljava/lang/String;)V+147
+j  org.gradle.launcher.bootstrap.ProcessBootstrap.run(Ljava/lang/String;[Ljava/lang/String;)V+3
+j  org.gradle.launcher.GradleMain.main([Ljava/lang/String;)V+10
+v  ~StubRoutines::call_stub
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+100
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+56
+j  org.gradle.wrapper.BootstrapMainStarter.start([Ljava/lang/String;Ljava/io/File;)V+82
+j  org.gradle.wrapper.WrapperExecutor.execute([Ljava/lang/String;Lorg/gradle/wrapper/Install;Lorg/gradle/wrapper/BootstrapMainStarter;)V+14
+j  org.gradle.wrapper.GradleWrapperMain.main([Ljava/lang/String;)V+188
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x0000000016ed0000 JavaThread "Service Thread" daemon [_thread_blocked, id=14132, stack(0x0000000017270000,0x0000000017370000)]
+  0x00000000154fd000 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=4508, stack(0x0000000016d70000,0x0000000016e70000)]
+  0x00000000154f5000 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=4688, stack(0x0000000016c70000,0x0000000016d70000)]
+  0x00000000154f2000 JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=15856, stack(0x0000000016b70000,0x0000000016c70000)]
+  0x00000000154f0000 JavaThread "Attach Listener" daemon [_thread_blocked, id=16036, stack(0x0000000016a70000,0x0000000016b70000)]
+  0x00000000154ed000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=15916, stack(0x0000000016970000,0x0000000016a70000)]
+  0x000000000251d000 JavaThread "Finalizer" daemon [_thread_blocked, id=15620, stack(0x0000000016780000,0x0000000016880000)]
+  0x0000000002512800 JavaThread "Reference Handler" daemon [_thread_blocked, id=15996, stack(0x0000000016680000,0x0000000016780000)]
+=>0x0000000002422800 JavaThread "main" [_thread_in_vm, id=9592, stack(0x0000000002310000,0x0000000002410000)]
+
+Other Threads:
+  0x00000000154b8000 VMThread [stack: 0x0000000016580000,0x0000000016680000] [id=16000]
+  0x000000001554d800 WatcherThread [stack: 0x0000000017370000,0x0000000017470000] [id=5732]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+heap address: 0x00000000b0800000, size: 1272 MB, Compressed Oops mode: 32-bit
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x0000000100000000
+
+Heap:
+ PSYoungGen      total 24064K, used 10082K [0x00000000e5800000, 0x00000000e7280000, 0x0000000100000000)
+  eden space 20992K, 48% used [0x00000000e5800000,0x00000000e61d89a8,0x00000000e6c80000)
+  from space 3072K, 0% used [0x00000000e6f80000,0x00000000e6f80000,0x00000000e7280000)
+  to   space 3072K, 0% used [0x00000000e6c80000,0x00000000e6c80000,0x00000000e6f80000)
+ ParOldGen       total 54784K, used 0K [0x00000000b0800000, 0x00000000b3d80000, 0x00000000e5800000)
+  object space 54784K, 0% used [0x00000000b0800000,0x00000000b0800000,0x00000000b3d80000)
+ Metaspace       used 4755K, capacity 5296K, committed 5504K, reserved 1058816K
+  class space    used 589K, capacity 640K, committed 640K, reserved 1048576K
+
+Card table byte_map: [0x00000000118e0000,0x0000000011b60000] byte_map_base: 0x000000001135c000
+
+Marking Bits: (ParMarkBitMap*) 0x00000000616b5ce0
+ Begin Bits: [0x0000000012110000, 0x00000000134f0000)
+ End Bits:   [0x00000000134f0000, 0x00000000148d0000)
+
+Polling page: 0x0000000002220000
+
+CodeCache: size=245760Kb used=1806Kb max_used=1806Kb free=243953Kb
+ bounds [0x0000000002520000, 0x0000000002790000, 0x0000000011520000]
+ total_blobs=603 nmethods=334 adapters=183
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 1.447 Thread 0x00000000154fd000  331       3       java.net.URLStreamHandler::setURL (40 bytes)
+Event: 1.448 Thread 0x00000000154fd000 nmethod 331 0x00000000026dd690 code [0x00000000026dd820, 0x00000000026ddbd8]
+Event: 1.461 Thread 0x00000000154fd000  333       3       java.util.Objects::requireNonNull (15 bytes)
+Event: 1.462 Thread 0x00000000154fd000 nmethod 333 0x00000000026dd210 code [0x00000000026dd380, 0x00000000026dd5a8]
+Event: 1.464 Thread 0x00000000154fd000  334       3       java.lang.ref.SoftReference::get (29 bytes)
+Event: 1.465 Thread 0x00000000154fd000 nmethod 334 0x00000000026dce50 code [0x00000000026dcfa0, 0x00000000026dd190]
+Event: 1.466 Thread 0x00000000154fd000  335       3       java.util.zip.ZipEntry::getSize (5 bytes)
+Event: 1.466 Thread 0x00000000154fd000 nmethod 335 0x00000000026dcb50 code [0x00000000026dcca0, 0x00000000026dcdf0]
+Event: 1.475 Thread 0x00000000154f5000  336  s!   4       sun.misc.URLClassPath::getLoader (243 bytes)
+Event: 1.475 Thread 0x00000000154f2000  337  s    4       sun.misc.URLClassPath::getNextLoader (88 bytes)
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (1 events):
+Event: 1.202 Thread 0x0000000002422800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000002699ef8 method=java.lang.String.startsWith(Ljava/lang/String;I)Z @ 25
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (9 events):
+Event: 0.072 Thread 0x0000000002422800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000e5807cb0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u211\12973\hotspot
+Event: 0.072 Thread 0x0000000002422800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x00000000e5807f98) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u211\12973\hotspot\src\share\vm\prim
+Event: 0.728 Thread 0x0000000002422800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000e596f868) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u211\12973\hotspot\src\share\vm\prims\jvm.cpp, line 1502]
+Event: 0.729 Thread 0x0000000002422800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000e596fa78) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u211\12973\hotspot\src\share\vm\prims\jvm.cpp, line 1502]
+Event: 0.733 Thread 0x0000000002422800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000e5973988) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u211\12973\hotspot\src\share\vm\prims\jvm.cpp, line 1502]
+Event: 0.733 Thread 0x0000000002422800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000e5973b98) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u211\12973\hotspot\src\share\vm\prims\jvm.cpp, line 1502]
+Event: 1.375 Thread 0x0000000002422800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException': 100> (0x00000000e5fd3100) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u211\12973\hotspot\src\share\vm\interpreter\interpreterRuntime.cpp, line 368]
+Event: 1.377 Thread 0x0000000002422800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException': 18> (0x00000000e5fd4038) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u211\12973\hotspot\src\share\vm\interpreter\interpreterRuntime.cpp, line 368]
+Event: 1.378 Thread 0x0000000002422800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException': 40> (0x00000000e5fd4c68) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u211\12973\hotspot\src\share\vm\interpreter\interpreterRuntime.cpp, line 368]
+
+Events (10 events):
+Event: 1.477 loading class org/gradle/internal/logging/source/StdErrLoggingSystem
+Event: 1.477 loading class org/gradle/internal/logging/source/StdErrLoggingSystem done
+Event: 1.479 loading class org/gradle/internal/logging/LoggingManagerInternal
+Event: 1.479 loading class org/gradle/internal/logging/LoggingManagerInternal done
+Event: 1.480 loading class org/gradle/api/logging/LoggingManager
+Event: 1.480 loading class org/gradle/api/logging/LoggingManager done
+Event: 1.484 loading class org/gradle/internal/logging/StandardOutputCapture
+Event: 1.484 loading class org/gradle/internal/logging/StandardOutputCapture done
+Event: 1.486 loading class org/gradle/internal/logging/config/LoggingSystemAdapter
+Event: 1.486 loading class org/gradle/internal/logging/config/LoggingSystemAdapter done
+
+
+Dynamic libraries:
+0x00007ff6166e0000 - 0x00007ff616717000 	C:\Program Files\Java\jdk1.8.0_211\bin\java.exe
+0x00007ff920ee0000 - 0x00007ff9210c1000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ff91ee60000 - 0x00007ff91ef11000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ff91d4f0000 - 0x00007ff91d763000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ff91f080000 - 0x00007ff91f121000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ff91e4c0000 - 0x00007ff91e55e000 	C:\Windows\System32\msvcrt.dll
+0x00007ff91f1b0000 - 0x00007ff91f20b000 	C:\Windows\System32\sechost.dll
+0x00007ff91e8b0000 - 0x00007ff91e9d4000 	C:\Windows\System32\RPCRT4.dll
+0x00007ff91e9e0000 - 0x00007ff91eb70000 	C:\Windows\System32\USER32.dll
+0x00007ff91d2b0000 - 0x00007ff91d2d0000 	C:\Windows\System32\win32u.dll
+0x00007ff91ed50000 - 0x00007ff91ed78000 	C:\Windows\System32\GDI32.dll
+0x00007ff91d350000 - 0x00007ff91d4e1000 	C:\Windows\System32\gdi32full.dll
+0x00007ff91e270000 - 0x00007ff91e30f000 	C:\Windows\System32\msvcp_win.dll
+0x00007ff91d770000 - 0x00007ff91d868000 	C:\Windows\System32\ucrtbase.dll
+0x00007ff9097c0000 - 0x00007ff909a29000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17134.885_none_fb42a3473065565f\COMCTL32.dll
+0x00007ff91e560000 - 0x00007ff91e882000 	C:\Windows\System32\combase.dll
+0x00007ff91d2d0000 - 0x00007ff91d349000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ff91e3f0000 - 0x00007ff91e41d000 	C:\Windows\System32\IMM32.DLL
+0x0000000061740000 - 0x0000000061812000 	C:\Program Files\Java\jdk1.8.0_211\jre\bin\msvcr100.dll
+0x0000000060e90000 - 0x0000000061735000 	C:\Program Files\Java\jdk1.8.0_211\jre\bin\server\jvm.dll
+0x00007ff91e3d0000 - 0x00007ff91e3d8000 	C:\Windows\System32\PSAPI.DLL
+0x00007ff91a3e0000 - 0x00007ff91a3e9000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ff920e40000 - 0x00007ff920eac000 	C:\Windows\System32\WS2_32.dll
+0x00007ff91a330000 - 0x00007ff91a353000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ff918060000 - 0x00007ff91806a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ff91a300000 - 0x00007ff91a32a000 	C:\Windows\SYSTEM32\winmmbase.dll
+0x00007ff91e220000 - 0x00007ff91e269000 	C:\Windows\System32\cfgmgr32.dll
+0x00007ff917b70000 - 0x00007ff917b7f000 	C:\Program Files\Java\jdk1.8.0_211\jre\bin\verify.dll
+0x00007ff917b30000 - 0x00007ff917b59000 	C:\Program Files\Java\jdk1.8.0_211\jre\bin\java.dll
+0x00007ff912cd0000 - 0x00007ff912ce6000 	C:\Program Files\Java\jdk1.8.0_211\jre\bin\zip.dll
+0x00007ff91f3b0000 - 0x00007ff9207f0000 	C:\Windows\System32\SHELL32.dll
+0x00007ff920d90000 - 0x00007ff920e39000 	C:\Windows\System32\shcore.dll
+0x00007ff91db10000 - 0x00007ff91e21d000 	C:\Windows\System32\windows.storage.dll
+0x00007ff9208e0000 - 0x00007ff920931000 	C:\Windows\System32\shlwapi.dll
+0x00007ff91d230000 - 0x00007ff91d241000 	C:\Windows\System32\kernel.appcore.dll
+0x00007ff91d1f0000 - 0x00007ff91d20f000 	C:\Windows\System32\profapi.dll
+0x00007ff91d260000 - 0x00007ff91d2ac000 	C:\Windows\System32\powrprof.dll
+0x00007ff91d250000 - 0x00007ff91d25a000 	C:\Windows\System32\FLTLIB.DLL
+0x00007ff9113b0000 - 0x00007ff9113ca000 	C:\Program Files\Java\jdk1.8.0_211\jre\bin\net.dll
+0x00007ff912600000 - 0x00007ff9127c9000 	C:\Windows\SYSTEM32\urlmon.dll
+0x00007ff912980000 - 0x00007ff912c26000 	C:\Windows\SYSTEM32\iertutil.dll
+0x00007ff91cc40000 - 0x00007ff91cc4b000 	C:\Windows\SYSTEM32\CRYPTBASE.DLL
+0x00007ff91ca70000 - 0x00007ff91cad6000 	C:\Windows\system32\mswsock.dll
+0x00007ff910190000 - 0x00007ff9101a2000 	C:\Program Files\Java\jdk1.8.0_211\jre\bin\nio.dll
+
+VM Arguments:
+jvm_args: -Dorg.gradle.appname=gradlew 
+java_command: org.gradle.wrapper.GradleWrapperMain installDebug
+java_class_path (initial): E:\Android\codebase-mobile-master\android\\gradle\wrapper\gradle-wrapper.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_211
+CLASSPATH=E:\Android\codebase-mobile-master\android\\gradle\wrapper\gradle-wrapper.jar
+PATH=C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Users\LENOVO\AppData\Local\watchman;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\bin\git.exe;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Android\android-sdk\platform-tools;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Users\LENOVO\AppData\Local\watchman;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\bin\git.exe;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Android\android-sdk\platform-tools;;C:\Users\LENOVO\AppData\watchman;C:\Users\LENOVO\AppData\Roaming\npm;C:\Users\LENOVO\AppData\Local\Yarn\bin;C:\Users\LENOVO\AppData\Local\Programs\Microsoft VS Code\bin
+USERNAME=LENOVO
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 22 Model 48 Stepping 1, AuthenticAMD
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 17134 (10.0.17134.753)
+
+CPU:total 4 (initial active 4) (4 cores per cpu, 1 threads per core) family 22 model 48 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, aes, clmul, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv, bmi1
+
+Memory: 4k page, physical 5206388k(363452k free), swap 20935028k(604k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.211-b12) for windows-amd64 JRE (1.8.0_211-b12), built on Apr  1 2019 20:53:26 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Mon Jul 29 15:17:30 2019
+timezone: SE Asia Standard Time
+elapsed time: 1 seconds (0d 0h 0m 1s)
+
