@@ -13,6 +13,7 @@ import Verification from '../screens/Verification';
 import Find from '../screens/Find';
 import SignUp from '../screens/SignUp';
 import Exam from '../screens/Exam';
+import UploadCV from '../screens/UploadCV'
 
 export default SwitchNavigator(
   {
@@ -28,7 +29,8 @@ export default SwitchNavigator(
     Verification : Verification,
     Find : Find,
     SignUp : SignUp,
-    Exam : Exam
+    Exam : Exam,
+    UploadCV : UploadCV
   },
   {
     initialRouteName: 'OnBoarding'

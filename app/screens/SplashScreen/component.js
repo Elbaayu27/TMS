@@ -13,7 +13,7 @@ class Component extends React.Component {
              />
 
              <View style={{backgroundColor:'#175873', height:200, width:200, borderRadius:200/2}}></View>
-             <Image style={{position:'absolute', width:200, height:200}} source={require('../../../assets/images/fix.png')}/>
+             <Image style={{position:'absolute', width:300, height:300}} source={require('../../../assets/images/splash.png')}/>
             </View>
       
     );

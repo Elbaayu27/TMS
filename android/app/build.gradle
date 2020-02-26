@@ -149,11 +149,9 @@ android {
 
 dependencies {
     compile project(':react-native-date-picker')
-    compile project(':react-native-svg')
-    compile project(':react-native-i18n')
+    compile project(':react-native-document-picker')
     compile project(':@react-native-community/async-storage')
     compile project(':react-native-vector-icons')
-    implementation project(':rn-fetch-blob')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-svg')
     implementation project(':react-native-i18n')

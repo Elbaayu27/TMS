@@ -20,13 +20,13 @@ export default class Component extends React.Component {
     return (
       <View style={styles.container}>
         <DatePicker
-          style={{ width: 340}}
+          style={{ width: 250, paddingBottom:5}}
           date={date} //initial date from state
           mode="date" //The enum of date, datetime and time
           placeholder={placeholder}
-          format="YYYY-MM-DD"
-          minDate="2016-01-01"
-          maxDate="2030-01-01"
+          format="DD-MM-YYYY"
+          minDate="01-01-1999"
+          maxDate="01-01-2000"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{

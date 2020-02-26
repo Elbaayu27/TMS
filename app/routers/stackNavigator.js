@@ -13,6 +13,7 @@ import Find from "../screens/Find";
 import AssessmentSuccess from '../screens/AssessmentSuccess';
 import SignUp from '../screens/SignUp';
 import Exam from '../screens/Exam';
+import UploadCV from '../screens/UploadCV';
 
 export const HomeStack = StackNavigator(
   {
@@ -30,6 +31,18 @@ export const FindStack = StackNavigator(
   {
     Find: {
       screen: Find,
+      navigationOptions: {
+        tabBarVisible: true
+      }
+    }
+  },
+  { headerMode: 'none', navigationOptions: { tabBarVisible: false } }
+);
+
+export const UploadCVStack = StackNavigator(
+  {
+    UploadCV: {
+      screen: UploadCV,
       navigationOptions: {
         tabBarVisible: true
       }

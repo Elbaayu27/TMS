@@ -84,3 +84,20 @@ export const getDetailEvent = (data) => {
         payload: data
     }
 }
+
+// ===================================TMS==============================
+export const userAccount = (data, status) => {
+    return {
+        type: 'USER_ACCOUNT',
+        payload: data,
+        status: status
+    }
+}
+
+export const dataSkill = (data, name) => {
+    return {
+        type: 'SAVE_DATA_SKILL',
+        payload: data,
+        name: name
+    }
+}

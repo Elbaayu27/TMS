@@ -65,6 +65,7 @@
 		21574C13C9824E00A081B7AE /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEA23A66B64B4C78B1B8D565 /* Zocial.ttf */; };
 		387EA68D72BA40C99A1B6359 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAD52D5C41A45CEB5BE6B05 /* libRNCAsyncStorage.a */; };
 		89FFA8D20D554BB6BACD189B /* libRNDatePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3B4005D8C847548A8BB161 /* libRNDatePicker.a */; };
+		A1AF212D962444C6AB5B74D0 /* libRNDocumentPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F687CBDA95434197A207B7 /* libRNDocumentPicker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -431,6 +432,8 @@
 		0CAD52D5C41A45CEB5BE6B05 /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; name = "libRNCAsyncStorage.a"; path = "libRNCAsyncStorage.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		63BEACD6E606415D93D3E574 /* RNDatePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNDatePicker.xcodeproj"; path = "../node_modules/react-native-date-picker/ios/RNDatePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		9F3B4005D8C847548A8BB161 /* libRNDatePicker.a */ = {isa = PBXFileReference; name = "libRNDatePicker.a"; path = "libRNDatePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		9F865010223346C28207103E /* RNDocumentPicker.xcodeproj */ = {isa = PBXFileReference; name = "RNDocumentPicker.xcodeproj"; path = "../node_modules/react-native-document-picker/ios/RNDocumentPicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		90F687CBDA95434197A207B7 /* libRNDocumentPicker.a */ = {isa = PBXFileReference; name = "libRNDocumentPicker.a"; path = "libRNDocumentPicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -463,6 +466,7 @@
 				DB03E384F37F45B9B4E711F0 /* libRNVectorIcons.a in Frameworks */,
 				387EA68D72BA40C99A1B6359 /* libRNCAsyncStorage.a in Frameworks */,
 				89FFA8D20D554BB6BACD189B /* libRNDatePicker.a in Frameworks */,
+				A1AF212D962444C6AB5B74D0 /* libRNDocumentPicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,6 +662,7 @@
 				4DD08D13A3DF4491B5E3CC7A /* RNVectorIcons.xcodeproj */,
 				6B23AD4802454BCEB8DEBE5E /* RNCAsyncStorage.xcodeproj */,
 				63BEACD6E606415D93D3E574 /* RNDatePicker.xcodeproj */,
+				9F865010223346C28207103E /* RNDocumentPicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1404,13 +1409,13 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-date-picker\ios\RNDatePicker",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
 				);
 				INFOPLIST_FILE = componentTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1435,13 +1440,13 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-date-picker\ios\RNDatePicker",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
 				);
 				INFOPLIST_FILE = componentTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1467,6 +1472,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-date-picker\ios\RNDatePicker",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
 				);
 				INFOPLIST_FILE = component/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1494,6 +1500,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-date-picker\ios\RNDatePicker",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
 				);
 				INFOPLIST_FILE = component/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1528,12 +1535,12 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-date-picker\ios\RNDatePicker",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
 				);
 				INFOPLIST_FILE = "component-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1567,12 +1574,12 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-date-picker\ios\RNDatePicker",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
 				);
 				INFOPLIST_FILE = "component-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1605,12 +1612,12 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-date-picker\ios\RNDatePicker",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
 				);
 				INFOPLIST_FILE = "component-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1643,12 +1650,12 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)\..\node_modules\react-native-date-picker\ios\RNDatePicker",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
 				);
 				INFOPLIST_FILE = "component-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

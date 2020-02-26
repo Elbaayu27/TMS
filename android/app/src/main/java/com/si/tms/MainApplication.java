@@ -3,6 +3,7 @@ package com.si.tms;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.github.elyx0.reactnativedocumentpicker.DocumentPickerPackage;
 import com.henninghall.date_picker.DatePickerPackage;
 import com.horcrux.svg.SvgPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
@@ -30,12 +31,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
+            new DocumentPickerPackage(),
             new DatePickerPackage(),
             new SvgPackage(),
             new RNI18nPackage(),
             new AsyncStoragePackage(),
-            new VectorIconsPackage(),
-            new RNFetchBlobPackage()
+            new VectorIconsPackage()
       );
     }
 

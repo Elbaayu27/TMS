@@ -1,36 +1,27 @@
 import React from 'react';
-import { View, TextInput, StatusBar, Image, Text, TouchableOpacity, ScrollView} from 'react-native';
+import { View, TextInput, StatusBar, Image, Text, TouchableOpacity, ScrollView, Alert, Picker} from 'react-native';
 import PropTypes from 'prop-types';
 import Button from '../../components/elements/Button';
 import BasicTitle from '../../components/elements/Input/BasicTitle';
 import { connect } from 'react-redux';
-import {loginSuccess} from '../../actions';
+import {loginSuccess, register, userAccount} from '../../actions';
 import Back from '../../../assets/svgs/Back';
 import styles from './styles';
 import PhoneInput from "react-native-phone-input";
 import AppIntroSlider from 'react-native-app-intro-slider';
+import Date from '../../components/elements/Input/Date';
+import network from '../../network'
 // import {ENDPOINT} from 'app/configs';
 
-const slides=[
-  {
-    key:'satu',
-    title:'Title 1',
-    text: 'L-Fix partners are professional partners who have \n been recognized in their fields. ',
-    image: require('../../../assets/images/carousel.jpeg'),
-    backgroundColor: '#FFFFFF'
-  },
-  {
-    key:'dua',
-    title:'Title 2',
-    text: 'Ready to come for maintain and repair your \n electronics stuff',
-    image: require('../../../assets/images/samsung.jpg'),
-    // backgroundColor: '#FFFFFF'
-  }
-];
 class Component extends React.Component {
     state = {
       email : '',
       password : '',
+      name : '',
+      bornDate :'',
+      address :'',
+      phone :'',
+      gender :null,
       value: '',
       phoneCode: '',
       isSplashScreen : true,
@@ -51,11 +42,52 @@ class Component extends React.Component {
     this.setState({ showRealApp: true });
   }
 
-  _onSignup = () => {
-    this.props.navigation.navigate('Home');
+  _onSignup = async () => {
+    const login = new Promise( async  (resolve, reject) => {
+      await fetch(network.ADDRESS+'/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+          address: this.state.address,
+          phone: this.state.phone,
+          born_date: this.state.bornDate,
+          gender: this.state.gender
+
+
+        })
+      }).then(response => response.json())
+        .then(responseJson => {
+          if (responseJson.success === true) {
+            resolve(responseJson)
+          }
+          else {
+            reject({
+              message: 'Failed to SignUp'
+            })
+          }
+        }).catch(response => Alert.alert(response))
+    })
+
+    await login
+          .then(async response => {
+            console.log(response)
+            await this.props.dispatchUserAcount(response.data);
+            this.props.navigation.navigate('Home');
+          })
+          .catch(response => {
+            console.log(response)
+            Alert.alert('SignUp Failed Please Check Your Data')
+          })
+    
   }
  
   render() {
+    console.log(this.state.gender, 'gender');
     return (
         <View style={{backgroundColor: '#455a64', flex:1}}>
             <StatusBar
@@ -67,55 +99,74 @@ class Component extends React.Component {
             <Text style={styles.logoText}>Welcome to Talent Management System.</Text>
 
             <ScrollView>
-            <View style={{backgroundColor: '#455a64', height:400}}>
-            <TextInput style={styles.inputBox}
-                underlineColorAndroid='rgba(0,0,0,0)'
-                placeholder="Email"
-                placeholderTextColor = "#ffffff"
-                selectionColor="#fff"
-                keyboardType="email-address"
-                onSubmitEditing={()=> this.password.focus()}
-            />
-            <TextInput style={styles.inputBox2}
-                underlineColorAndroid='rgba(0,0,0,0)'
-                placeholder="Password"
-                placeholderTextColor = "#ffffff"
-                selectionColor="#fff"
-                keyboardType="visible-password"
-                onSubmitEditing={()=> this.password.focus()}
-            /> 
-            <TextInput style={styles.inputBox2}
-                underlineColorAndroid='rgba(0,0,0,0)'
-                placeholder="Name"
-                placeholderTextColor = "#ffffff"
-                selectionColor="#fff"
-                keyboardType="visible-password"
-                onSubmitEditing={()=> this.password.focus()}
-            />  
-            <TextInput style={styles.inputBox2}
-                underlineColorAndroid='rgba(0,0,0,0)'
-                placeholder="Address"
-                placeholderTextColor = "#ffffff"
-                selectionColor="#fff"
-                keyboardType="visible-password"
-                onSubmitEditing={()=> this.password.focus()}
-            /> 
-            <TextInput style={styles.inputBox2}
-                underlineColorAndroid='rgba(0,0,0,0)'
-                placeholder="Phone"
-                placeholderTextColor = "#ffffff"
-                selectionColor="#fff"
-                keyboardType="visible-password"
-                onSubmitEditing={()=> this.password.focus()}
-            /> 
-            <TextInput style={styles.inputBox2}
-                underlineColorAndroid='rgba(0,0,0,0)'
-                placeholder="Age"
-                placeholderTextColor = "#ffffff"
-                selectionColor="#fff"
-                keyboardType="visible-password"
-                onSubmitEditing={()=> this.password.focus()}
-            />
+            <View style={{backgroundColor: '#455a64', flex:1}}>
+              <TextInput style={styles.inputBox}
+                  underlineColorAndroid='rgba(0,0,0,0)'
+                  placeholder="Email"
+                  placeholderTextColor = "#ffffff"
+                  selectionColor="#fff"
+                  keyboardType="email-address"
+                  onChangeText= {(text) => this.setState({email: text})}
+              />
+              <TextInput style={styles.inputBox2}
+                  underlineColorAndroid='rgba(0,0,0,0)'
+                  autoCompleteType='password'
+                  placeholder="Password"
+                  placeholderTextColor = "#ffffff"
+                  selectionColor="#fff"
+                  secureTextEntry={true}
+                  onChangeText= {(text) => this.setState({password: text})}
+              /> 
+              <TextInput style={styles.inputBox2}
+                  underlineColorAndroid='rgba(0,0,0,0)'
+                  placeholder="Name"
+                  placeholderTextColor = "#ffffff"
+                  selectionColor="#fff"
+                  keyboardType="visible-password"
+                  onChangeText= {(text) => this.setState({name: text})}
+              />  
+              <View style={styles.inputBox2}>
+                <Date placeholder='Born Date' date={this.state.bornDate} onDateChange= {(text) => this.setState({bornDate: text})}/>
+              </View>
+              <TextInput style={styles.inputBox2}
+                  underlineColorAndroid='rgba(0,0,0,0)'
+                  placeholder="Address"
+                  placeholderTextColor = "#ffffff"
+                  selectionColor="#fff"
+                  keyboardType="visible-password"
+                  onChangeText= {(text) => this.setState({address: text})}
+              /> 
+              <TextInput style={styles.inputBox2}
+                  underlineColorAndroid='rgba(0,0,0,0)'
+                  placeholder="Phone"
+                  placeholderTextColor = "#ffffff"
+                  selectionColor="#fff"
+                  keyboardType="visible-password"
+                  onChangeText= {(text) => this.setState({phone: text})}
+              /> 
+              {/* <TextInput style={styles.inputBox2}
+                  underlineColorAndroid='rgba(0,0,0,0)'
+                  placeholder="Gender"
+                  placeholderTextColor = "#ffffff"
+                  selectionColor="#fff"
+                  keyboardType="visible-password"
+                  onChangeText= {(text) => this.setState({gender: text})}
+              /> */}
+              <View style={styles.inputBox2}>
+                <Picker
+                  selectedValue={this.state.gender}
+                  style={{width:270, fontSize:16,color:'#ffffff',}}
+                  onValueChange={(itemValue, itemIndex) => {
+                    this.setState({
+                      ...this.state,
+                      gender : itemValue
+                    })
+                  }
+                  }>
+                  <Picker.Item label="Pria" value="Pria" />
+                  <Picker.Item label="Wanita" value="Wanita" />
+                </Picker>
+              </View>
             </View> 
             </ScrollView>  
 
@@ -149,7 +200,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login : (data) => dispatch(loginSuccess(data))
+    login : (data) => dispatch(loginSuccess(data)),
+    dispatchUserAcount: (account) => dispatch(userAccount(account, true)),
 
   }
 }

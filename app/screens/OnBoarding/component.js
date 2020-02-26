@@ -1,15 +1,17 @@
 import React from 'react';
-import { View, TextInput, StatusBar, Image, Text, TouchableOpacity} from 'react-native';
+import { View, TextInput, StatusBar, Image, Text, TouchableOpacity, Alert} from 'react-native';
 import PropTypes from 'prop-types';
 import Button from '../../components/elements/Button';
 import BasicTitle from '../../components/elements/Input/BasicTitle';
 import SplashScreen from '../SplashScreen'
 import { connect } from 'react-redux';
-import {loginSuccess} from '../../actions';
+import {userAccount} from '../../actions';
 import Back from '../../../assets/svgs/Back';
 import styles from './styles';
 import PhoneInput from "react-native-phone-input";
 import AppIntroSlider from 'react-native-app-intro-slider';
+import AsyncStorage from '@react-native-community/async-storage';
+import network from '../../network'
 // import {ENDPOINT} from 'app/configs';
 
 const slides=[
@@ -33,7 +35,6 @@ class Component extends React.Component {
       email : '',
       password : '',
       value: '',
-      phoneCode: '',
       isSplashScreen : true,
       showRealApp:false
     }
@@ -58,22 +59,71 @@ class Component extends React.Component {
     this.setState({ showRealApp: true });
   }
 
-  _onLogin = () => {
-    this.props.navigation.navigate('Home');
+  _onLogin = async () => {
+    const login = new Promise( async  (resolve, reject) => {
+      await fetch(network.ADDRESS+'/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password
+        })
+      }).then(response => response.json())
+        .then(responseJson => {
+          if (responseJson.success === true) {
+            resolve(responseJson);
+          }
+          else {
+            reject({
+              message: 'Failed to Login'
+            });
+          }
+        }).catch(response => Alert.alert(response))
+    })
+
+ await login
+          .then( async response => {
+            console.log(response)
+            await this.props.dispatchUserAccount(response.data);
+            try {
+              await AsyncStorage.setItem('userAccount', JSON.stringify(response.data));
+            } catch(e) {
+              // save error
+              Alert.alert(e)
+            }
+            this.props.navigation.navigate('Home');
+          })
+          .catch(response => {
+            console.log(response)
+            Alert.alert('Login Failed Please Check Email/Password')
+          })  
   }
 
-  componentDidMount() {
-    // setTimeout( () => {
-    //   this.setState({
-    //     isSplashScreen : false
-    //   })
-    // },2000)
+  async componentDidMount() {
+    try {
+      const value = await AsyncStorage.getItem('userAccount');
+      if(value !== null) {
+        // value previously stored
+        await this.props.dispatchUserAccount(JSON.parse(value));
+        this.props.navigation.navigate('Home');
+
+      }
+    } catch(e) {
+      // read error
+    }
+    setTimeout( () => {
+      this.setState({
+        isSplashScreen : false
+      })
+    },2000)
   }
     
   render() {
-    // if(this.state.isSplashScreen) {
-    //   return <SplashScreen/>
-    // }
+    if(this.state.isSplashScreen) {
+      return <SplashScreen/>
+    }
     return (
         <View style={{backgroundColor: '#455a64', flex:1}}>
             <StatusBar
@@ -89,15 +139,16 @@ class Component extends React.Component {
                 placeholderTextColor = "#ffffff"
                 selectionColor="#fff"
                 keyboardType="email-address"
-                onSubmitEditing={()=> this.password.focus()}
+                onChangeText= {(text) => this.setState({email: text})}
             />
             <TextInput style={styles.inputBox2}
                 underlineColorAndroid='rgba(0,0,0,0)'
                 placeholder="Password"
                 placeholderTextColor = "#ffffff"
                 selectionColor="#fff"
-                keyboardType="visible-password"
-                onSubmitEditing={()=> this.password.focus()}
+                secureTextEntry={true}
+                // keyboardType="visible-password"
+                onChangeText= {(text) => this.setState({password: text})}
             />    
 
             <TouchableOpacity onPress={this._onLogin} style={styles.button}>
@@ -124,14 +175,15 @@ const mapStateToProps = state => {
   return {
     //  status: state.isLogged,
     // akun : state.isLogged.akun,
-    user : state.user,
+    // user : state.user,
+    userAccount : state.userAccount
+
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login : (data) => dispatch(loginSuccess(data))
-
+    dispatchUserAccount: (account) => dispatch(userAccount(account, true)),
   }
 }
 

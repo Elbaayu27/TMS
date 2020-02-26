@@ -1,99 +1,52 @@
 import React from 'react';
-import { View, StatusBar, Text, FlatList, TouchableOpacity} from 'react-native';
+import { View, StatusBar, Text, FlatList, TouchableOpacity, Alert} from 'react-native';
 import RadioButton from '../../components/elements/RadioButton';
 import styles from './styles';
 import Button from '../../components/elements/Button';
 import Modal, { ModalContent } from 'react-native-modals';
+import OrientationLoadingOverlay from 'react-native-orientation-loading-overlay';
+import network from '../../network';
 // import { Button } from 'native-base';
+import { connect } from 'react-redux';
+import {userAccount, dataSkill} from '../../actions';
 
-export default class Component extends React.Component {
+class Component extends React.Component {
   constructor(props) {
     super(props); 
     this.state = {
       number:{},
+      loading: true,
       selected: '',
-      skill:[{id:'01',nama:'Laravel'},{id:'02',nama:'React Native'},{id:'03',nama:'CodeIgniter'},{id:'04',nama:'Flutter'},{id:'05',nama:'Kotlin'}],
-      Data:{skill:'laravel',
-            soal: [
-              {
-                id_soal:1,
-                soal:'Apa itu laravel ?',
-                jawaban:[
-                  {id_jawaban:1,
-                    jawaban: "Framework"
-                  },
-                  {id_jawaban:2,
-                    jawaban: "OS"
-                  },
-                  {id_jawaban:3,
-                    jawaban: "Kernel"
-                  },
-                  {id_jawaban:4,
-                    jawaban: "Text Editor"
-                    },
-                ]
-              },
-              {
-                id_soal:2,
-                soal:'Apa itu laravel ?',
-                jawaban:[
-                  {id_jawaban:5,
-                    jawaban: "Framework"
-                  },
-                  {id_jawaban:6,
-                    jawaban: "OS"
-                  },
-                  {id_jawaban:7,
-                    jawaban: "Kernel"
-                  },
-                  {id_jawaban:8,
-                    jawaban: "Text Editor"
-                    },
-                ]
-              },
-              {
-                id_soal:3,
-                soal:'Apa itu laravel ?',
-                jawaban:[
-                  {id_jawaban:9,
-                    jawaban: "Framework"
-                  },
-                  {id_jawaban:10,
-                    jawaban: "OS"
-                  },
-                  {id_jawaban:11,
-                    jawaban: "Kernel"
-                  },
-                  {id_jawaban:12,
-                    jawaban: "Text Editor"
-                    },
-                ]
-              },
-              {
-                id_soal:13,
-                soal:'Apa itu laravel ?',
-                jawaban:[
-                  {id_jawaban:14,
-                    jawaban: "Framework"
-                  },
-                  {id_jawaban:15,
-                    jawaban: "OS"
-                  },
-                  {id_jawaban:16,
-                    jawaban: "Kernel"
-                  },
-                  {id_jawaban:117,
-                    jawaban: "Text Editor"
-                    },
-                ]
-              }
-            ]
-    },
+      skill:null,
   };
 }
 
+async componentDidMount() {
+  await fetch(network.ADDRESS+'/skillCategory', {
+    method: 'POST',
+    headers: {
+      'Content-Type' : 'application/json',
+    },
+    body: JSON.stringify({
+      idUser: this.props.userAccount.data.id_jobseeker
+    })
+  }).then(response => response.json())
+    .then(responseJson => {
+      if (responseJson.success === true) {
+        this.setState({
+          skill: responseJson.data,
+          loading: false
+        })
+      }
+      else {
+        Alert.alert(responseJson.message);
+      }
+    }).catch(response => Alert.alert(response))
+}
 
-  _onPress = () => {
+  _onPress = async (id_skill, name) => {
+    console.log(id_skill, name);
+    await this.props.dispatchDataSkill(id_skill, name)
     this.props.navigation.navigate('Exam');
   };
 
@@ -127,14 +80,53 @@ export default class Component extends React.Component {
          ItemSeparatorComponent={this.FlatListItemSeparator}
          keyExtractor={(item, index) => index.toString()}
          renderItem={({item, index}) => (
-         <View  style={{flex: 1, flexDirection: 'row', justifyContent:'space-between' }}>
-            <Text style={styles.item} onPress={this._onPress}>
+         <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-between' }}>
+           {item.skor !== 'null' ?
+            <Text style={styles.item} disabled={true}>
               {item.nama}
-            </Text>
+            </Text> 
+            :
+            <Text style={styles.item} onPress={ async () => 
+                    {
+                      await this.props.dispatchDataSkill(item.idSkill, item.nama)
+                      this.props.navigation.navigate('Exam')
+                    }}>
+              {item.nama}
+            </Text> }
+            {item.skor !== 'null' ? <Text style={{marginTop:5,marginRight:10,fontWeight:'bold',fontSize:16, color:'green'}}> {item.skor}</Text> :  <Text style={{marginTop:5,marginRight:10,fontWeight:'bold', fontSize:16, color:'red'}}>Not Exam Yet </Text> }
           </View>
                    )}
+          />
+
+          {/* Loading */}
+          <OrientationLoadingOverlay
+          visible={this.state.loading}
+          color="white"
+          indicatorSize="large"
+          messageFontSize={24}
+          message="Loading"
           />
       </View>
     );
   }
 }
+
+const mapStateToProps = state => {
+
+  return {
+    //  status: state.isLogged,
+    // akun : state.isLogged.akun,
+    // user : state.user,
+    userAccount : state.userAccount
+
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchUserAccount: (account) => dispatch(userAccount(account, true)),
+    dispatchDataSkill: (idSkill, name) => dispatch(dataSkill(idSkill, name)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

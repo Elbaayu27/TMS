@@ -13,6 +13,8 @@ import measureSelectedReducer from './measureSelected';
 import dataPointReducer from './dataPoint';
 import updateDataPointReducer from './dataAsync';
 import detailEventReducer from './detailEvent'
+import userAccountReducer from './userAccount';
+import dataSkillReducer from './dataSkill'
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -28,7 +30,10 @@ const rootReducer = combineReducers({
   measureSelected : measureSelectedReducer,
   dataPoint : dataPointReducer,
   updateDataPoint: updateDataPointReducer,
-  detailEvent : detailEventReducer
+  detailEvent : detailEventReducer,
+  // ===========================TMS========================
+  userAccount : userAccountReducer,
+  dataSkill : dataSkillReducer
 });
 
 export default rootReducer;

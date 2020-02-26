@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, StatusBar, Text } from 'react-native';
+import { View, StatusBar, Text, Alert } from 'react-native';
 import MainScreen from '../../components/layouts/MainScreen';
 import Header from '../../components/elements/Header';
 import Button from '../../components/elements/Button';
 import Tabs from '../../components/elements/Tabs';
 import styles from './styles';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Component extends React.Component {
   constructor(props) {
@@ -13,7 +14,17 @@ export default class Component extends React.Component {
       tabIndex: 0
     };
   }
-  _onPress = () => {};
+  _onPress = async () => {
+    // Hapus AS
+    try {
+      await AsyncStorage.removeItem('userAccount')
+    } catch(e) {
+      // remove error
+      Alert.alert(e);
+    }
+
+    this.props.navigation.navigate('OnBoarding');
+  };
 
   _getTabData = () => [
     {
