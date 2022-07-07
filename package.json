@@ -25,7 +25,7 @@
     "base-64": "^0.1.0",
     "lint-staged": "^7.3.0",
     "lodash": "^4.17.10",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "native-base": "^2.13.8",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.54.2",
