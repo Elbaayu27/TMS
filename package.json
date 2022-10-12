@@ -28,7 +28,7 @@
     "moment": "^2.24.0",
     "native-base": "^2.13.8",
     "react": "16.6.0-alpha.8af6728",
-    "react-native": "0.54.2",
+    "react-native": "0.70.2",
     "react-native-app-intro-slider": "^3.0.0",
     "react-native-check-box": "^2.1.7",
     "react-native-checkbox": "^2.0.0",
